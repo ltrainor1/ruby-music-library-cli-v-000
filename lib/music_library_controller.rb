@@ -33,7 +33,7 @@ def list_songs
     song_list << sentence
     i += 1
   end
-  song_list
+  song_list.each {|song| puts song}
 end
 
 def list_artists
