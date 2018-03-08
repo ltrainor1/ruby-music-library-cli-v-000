@@ -1,0 +1,105 @@
+require 'pry'
+class MusicLibraryController
+  attr_accessor :path
+
+  def initialize(path = './db/mp3s')
+    @path = path
+    importer = MusicImporter.new(@path)
+    importer.import
+  end
+
+  def call
+    puts "Welcome to your music library!"
+    puts "To list all of your songs, enter 'list songs'."
+    puts "To list all of the artists in your library, enter 'list artists'."
+    puts "To list all of the genres in your library, enter 'list genres'."
+    puts "To list all of the songs by a particular artist, enter 'list artist'."
+    puts "To list all of the songs of a particular genre, enter 'list genre'."
+    puts "To play a song, enter 'play song'."
+    puts "To quit, type 'exit'."
+    input = ""
+    while input != "exit"
+      puts "What would you like to do?"
+      input = gets.strip
+    end
+end
+
+def list_songs
+  list = []
+  Song.all.each{|song| list << song}
+  list.sort_by!{|song| song.name[0]}
+  i = 1
+  list.each do |song|
+    puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    i += 1
+  end
+end
+
+def list_artists
+  list = []
+  Artist.all.each{|artist| list << artist}
+  list.sort_by!{|artist| artist.name}
+  i = 1
+  list.each do |artist|
+    puts "#{i}. #{artist.name}"
+    i += 1
+  end
+end
+
+def list_genres
+  list = []
+  Genre.all.each{|genre| list << genre}
+  list.sort_by!{|genre| genre.name}
+  i = 1
+  list.each do |genre|
+    puts "#{i}. #{genre.name}"
+    i += 1
+  end
+end
+
+def list_songs_by_artist
+  puts "Please enter the name of an artist:"
+  input = gets.strip
+  if !Artist.find_by_name(input)
+    nil
+  else
+    artist = Artist.find_by_name(input)
+    artist.songs.sort_by!{|song| song.name}
+    i = 1
+    artist.songs.each do |song|
+      puts "#{i}. #{song.name} - #{song.genre.name}"
+      i += 1
+    end
+  end
+end
+
+def list_songs_by_genre
+  puts "Please enter the name of a genre:"
+  input = gets.strip
+  if !Genre.find_by_name(input)
+    nil
+  else
+    genre = Genre.find_by_name(input)
+    genre.songs.sort_by!{|song| song.name}
+    i = 1
+    genre.songs.each do |song|
+      puts "#{i}. #{song.artist.name} - #{song.name}"
+      i += 1
+    end
+  end
+end
+
+def play_song
+  puts "Which song number would you like to play?"
+  input = gets.strip.to_i + 1
+  songs = Song.all.sort_by!{|song| song.name}
+  binding.pry
+  if input > 0 && input <= songs.length
+    puts "Playing #{songs[input].name} by #{songs[input].artist.name}"
+  else
+    nil
+  end
+end
+
+
+end
