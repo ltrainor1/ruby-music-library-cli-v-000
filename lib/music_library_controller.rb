@@ -25,7 +25,7 @@ class MusicLibraryController
 end
 
 def list_songs
-  Song.all.each{|song| list << song}
+  Song.all.sort_by!{|song| song.name}
   i = 1
   song_list = []
   Song.all.each do |song|
