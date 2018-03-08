@@ -90,13 +90,13 @@ def list_songs_by_genre
 end
 
 def play_song
-  puts "Which song number would you like to play?"
-  input = gets.strip.to_i + 1
-  songs = Song.all.sort_by!{|song| song.name[0]}
-  song = songs[input]
-  puts "Playing #{song.name} by #{song.artist.name}"
-  else
-    nil
+  input = nil 
+  until input.to_i > 0 && input.to_i <= Song.all.length
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i + 1
+    songs = Song.all.sort_by!{|song| song.name[0]}
+    song = songs[input]
+    puts "Playing #{song.name} by #{song.artist.name}"
   end
 end
 
