@@ -29,7 +29,7 @@ def list_songs
   i = 1
   song_list = []
   Song.all.each do |song|
-    sentence = "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}\n"
+    sentence = "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     song_list << sentence
     i += 1
   end
