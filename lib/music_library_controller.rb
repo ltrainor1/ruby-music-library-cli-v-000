@@ -26,8 +26,7 @@ end
 
 def list_songs
   list = []
-  Song.all.each{|song| list << song}
-  list.sort_by!{|song| song.name[0]}
+  Song.all.sort_by!{|song| song.name[0]}
   i = 1
   list.each do |song|
     puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
@@ -97,8 +96,8 @@ def play_song
     Song.all.sort_by!{|song| song.name[0]}
     song = list[input]
     puts "Playing #{song.name} by #{song.artist.name}"
-  else 
-    nil 
+  else
+    nil
   end
 end
 
