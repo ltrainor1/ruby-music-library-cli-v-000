@@ -94,7 +94,7 @@ def play_song
   input = nil
     puts "Which song number would you like to play?"
     input = gets.strip
-    index = input.to_i + 1
+    index = input.to_i + -1
     if index.to_i > 0 && index.to_i <= Song.all.length
     #Song.all.sort_by!{|song| song.name[0]}
     song = Song.all[index]
