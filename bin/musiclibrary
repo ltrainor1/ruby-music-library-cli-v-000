@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 library = MusicLibraryController.new
-library.call 
+library.call
 
 input = gets.strip
 
