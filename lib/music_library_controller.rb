@@ -92,7 +92,7 @@ end
 def play_song
   puts "Which song number would you like to play?"
   input = gets.strip.to_i + 1
-  songs = Song.all.sort_by!{|song| song.name}
+  songs = Song.all.sort_by!{|song| song.name[0]}
   binding.pry
   if input > 0 && input <= songs.length
     puts "Playing #{songs[input].name} by #{songs[input].artist.name}"
