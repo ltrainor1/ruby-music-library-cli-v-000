@@ -25,13 +25,15 @@ class MusicLibraryController
 end
 
 def list_songs
-  list = []
-  Song.all.sort_by!{|song| song.name[0]}
+  Song.all.each{|song| list << song}
   i = 1
-  list.each do |song|
-    puts "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+  song_list = []
+  Song.all.each do |song|
+    sentence = "#{i}. #{song.artist.name} - #{song.name} - #{song.genre.name}\n"
+    song_list << sentence
     i += 1
   end
+  song_list 
 end
 
 def list_artists
