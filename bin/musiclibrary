@@ -2,12 +2,13 @@
 
 require_relative '../config/environment'
 
-MusicLibraryController.new.call
+library = MusicLibraryController.new
+library.call 
 
 input = gets.strip
 
 if input == "list songs"
-MusicLibraryController.list_songs
+library.list_songs
 elsif input == "list artists"
 MusicLibraryController.list_artists
 elsif input == "list genres"
